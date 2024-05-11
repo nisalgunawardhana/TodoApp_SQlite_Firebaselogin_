@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todo.databinding.ActivityLoginBinding
+import com.example.todo.viewmodel.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -25,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.signuptext.setOnClickListener{
-            val user = auth.currentUser
             val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+            startActivity(intent)
         }
 
         binding.loginbtn.setOnClickListener{

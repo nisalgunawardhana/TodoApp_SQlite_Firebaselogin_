@@ -3,18 +3,25 @@ package com.example.todo
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todo.databinding.ActivitySignupBinding
+import com.example.todo.viewmodel.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class SignupActivity : AppCompatActivity() {
+class SignupActivity() : AppCompatActivity(), Parcelable {
     private lateinit var binding:ActivitySignupBinding
     private lateinit var auth: FirebaseAuth
+
+    constructor(parcel: Parcel) : this() {
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +32,8 @@ class SignupActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.textView3.setOnClickListener{
-            val user = auth.currentUser
             val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         binding.button.setOnClickListener{
@@ -62,6 +69,24 @@ class SignupActivity : AppCompatActivity() {
         if (currentUser != null) {
             val intent = Intent(this@SignupActivity, HomeActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<SignupActivity> {
+        override fun createFromParcel(parcel: Parcel): SignupActivity {
+            return SignupActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<SignupActivity?> {
+            return arrayOfNulls(size)
         }
     }
 }
