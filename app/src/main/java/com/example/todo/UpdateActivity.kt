@@ -1,4 +1,4 @@
-package com.example.todo.viewmodel
+package com.example.todo
 
 import android.os.Bundle
 import android.widget.Toast

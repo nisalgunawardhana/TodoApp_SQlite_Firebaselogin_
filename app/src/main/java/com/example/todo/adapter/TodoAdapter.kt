@@ -1,7 +1,7 @@
 package com.example.todo.adapter
 
-import com.example.todo.model.Todo
-import com.example.todo.database.TodoDatabaseHelper
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.AlarmReceiver
 import com.example.todo.R
-import com.example.todo.viewmodel.UpdateActivity
+import com.example.todo.UpdateActivity
+import com.example.todo.database.TodoDatabaseHelper
+import com.example.todo.model.Todo
+import java.text.SimpleDateFormat
 
 class TodoAdapter(private var todos: List<Todo>, private val context: Context) : RecyclerView.Adapter<TodoAdapter.TodoHolder>() {
 
@@ -63,4 +67,22 @@ class TodoAdapter(private var todos: List<Todo>, private val context: Context) :
         todos = newTodo.toList()
         notifyDataSetChanged()
     }
+
+    fun scheduleAlarm(todo: Todo) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
+            PendingIntent.FLAG_IMMUTABLE)
+
+        val dueDateTime = todo.dueDate + " " + todo.dueTime // Combine date and time
+        val dueMillis = SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dueDateTime)?.time ?: return
+
+        val currentTime = System.currentTimeMillis()
+        val alarmTime = dueMillis - (15 * 60 * 1000) // 15 minutes before due time
+
+        if (alarmTime > currentTime) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent)
+        }
+    }
+
 }

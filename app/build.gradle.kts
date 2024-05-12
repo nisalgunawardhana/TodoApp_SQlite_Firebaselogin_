@@ -51,11 +51,24 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    //noinspection UseTomlInstead
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-storage")
+
+    //Circular Image Library
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("androidx.room:room-runtime:2.4.0")
+    annotationProcessor ("androidx.room:room-compiler:2.4.0")
+
+
+
 }

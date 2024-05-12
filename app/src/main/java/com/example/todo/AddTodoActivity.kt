@@ -1,7 +1,5 @@
-package com.example.todo.viewmodel
+package com.example.todo
 
-import com.example.todo.model.Todo
-import com.example.todo.database.TodoDatabaseHelper
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -9,7 +7,9 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todo.database.TodoDatabaseHelper
 import com.example.todo.databinding.ActivityAddTodoBinding
+import com.example.todo.model.Todo
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
