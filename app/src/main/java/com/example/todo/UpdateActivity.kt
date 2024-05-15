@@ -47,15 +47,14 @@ class UpdateActivity : AppCompatActivity() {
             val newDate = binding.editTextDueDateEdit.text.toString()
             val newTime = binding.editTextDueTimeEdit.text.toString()
 
-            // Create a new com.example.todo.model.Todo object with updated values
-            val updatedTodo = Todo(todoId, newTitle, newDescription, newDate, newTime)
-
-            // Update the todo item in the database
-            db.updateTodo(updatedTodo)
-
-            // Finish the activity and display a toast message
-            finish()
-            Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
+            if (newTitle.isNotEmpty() && newDescription.isNotEmpty() && newDate.isNotEmpty() && newTime.isNotEmpty()) {
+                val updatedTodo = Todo(todoId, newTitle, newDescription, newDate, newTime)
+                db.updateTodo(updatedTodo)
+                finish()
+                Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

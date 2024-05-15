@@ -74,6 +74,11 @@ class AccountActivity : AppCompatActivity() {
             val lastName = binding.etLastName.text.toString()
             val bio = binding.etBio.text.toString()
 
+            if (firstName.isEmpty() || lastName.isEmpty() || bio.isEmpty()) {
+                Toast.makeText(this@AccountActivity, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Exit the click listener if any field is empty
+            }
+
             val user = UserData(firstName,lastName,bio)
             if (uid != null){
                 databaseReference.child(uid).setValue(user).addOnCompleteListener{

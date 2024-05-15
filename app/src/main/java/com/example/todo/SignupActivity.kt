@@ -36,6 +36,17 @@ class SignupActivity() : AppCompatActivity(), Parcelable {
         }
 
         binding.button.setOnClickListener{
+            val email = binding.editTextTextEmailAddress.text.toString().trim()
+            val password = binding.editTextTextPassword.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(
+                    baseContext,
+                    "Please enter both email and password.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener // Exit the click listener if fields are empty
+            }
             auth.createUserWithEmailAndPassword(binding.editTextTextEmailAddress.getText().toString().trim() , binding.editTextTextPassword.getText().toString().trim() )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

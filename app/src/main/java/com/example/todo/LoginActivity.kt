@@ -30,6 +30,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginbtn.setOnClickListener{
+            val email = binding.loginmail.text.toString().trim()
+            val password = binding.loginpw.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(
+                    baseContext,
+                    "Please enter both email and password.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener // Exit the click listener if fields are empty
+            }
             auth.signInWithEmailAndPassword(binding.loginmail.getText().toString().trim() , binding.loginpw.getText().toString().trim())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

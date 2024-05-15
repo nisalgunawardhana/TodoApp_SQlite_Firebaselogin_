@@ -21,7 +21,7 @@
             android:id="@+id/profile_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/profile" />
+            android:src="@drawable/dummy" />
 
         <ImageButton
             android:id="@+id/edit_image_button"
